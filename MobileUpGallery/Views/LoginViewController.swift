@@ -13,7 +13,7 @@ final class LoginViewController: UIViewController, WKNavigationDelegate {
     private(set) var viewModel: LoginViewModel
     private weak var coordinator: LoginCoordinator?
     // MARK: - UI Components
-    var webView: WKWebView = {
+    private let webView: WKWebView = {
         let webView = WKWebView()
         return webView
     }()
@@ -30,6 +30,7 @@ final class LoginViewController: UIViewController, WKNavigationDelegate {
         super.viewDidLoad()
         setup()
         viewModel.onTokenReceived = { [weak self] token in
+            self?.coordinator?.goToGallery()
             self?.coordinator?.parentCoordinator?.childDidFinish(self?.coordinator)
         }
     }
@@ -50,7 +51,7 @@ final class LoginViewController: UIViewController, WKNavigationDelegate {
         ])
     }
     // MARK: - Actions
-    @objc func authorize() {
+    @objc private func authorize() {
         viewModel.authorize { [weak self] result in
             switch result {
             case .success(let request):
@@ -68,5 +69,4 @@ final class LoginViewController: UIViewController, WKNavigationDelegate {
         }
         decisionHandler(.allow)
     }
-    
 }

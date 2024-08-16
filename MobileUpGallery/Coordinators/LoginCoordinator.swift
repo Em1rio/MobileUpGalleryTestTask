@@ -10,8 +10,8 @@ import UIKit
 
 final class LoginCoordinator: Coordinator {
     // MARK: - Variables
-    var navigationController: UINavigationController
-    private var networkManager: NetworkManagerProtocol
+    private let navigationController: UINavigationController
+    private let networkManager: NetworkManagerProtocol
     private let managerLocator: ManagerLocator
     private let sessionManager: SessionManagerProtocol
     var parentCoordinator: Coordinator?
@@ -32,6 +32,14 @@ final class LoginCoordinator: Coordinator {
         let loginViewController = LoginViewController(loginViewModel, coordinator: self)
         navigationController.present(loginViewController, animated: true)
     }
-    // MARK: - Navigation
-    
+}
+
+// MARK: - Navigation
+extension LoginCoordinator {
+    func goToGallery() {
+        let galleryCoordinator = GalleryCoordinator(navigationController: navigationController, networkManager: managerLocator.getNetworkManager(), managerLocator: managerLocator, sessionManager: sessionManager)
+        galleryCoordinator.parentCoordinator = self
+        galleryCoordinator.start()
+        childCoordinators.append(galleryCoordinator)
+    }
 }

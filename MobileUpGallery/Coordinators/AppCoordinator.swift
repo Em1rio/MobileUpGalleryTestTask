@@ -18,7 +18,7 @@ final class AppCoordinator: Coordinator  {
     // MARK: - Variables
     private let window: UIWindow
     private let managerLocator: ManagerLocator
-    private var navigationController: UINavigationController
+    private let navigationController: UINavigationController
     private let sessionManager: SessionManagerProtocol
     var parentCoordinator: Coordinator?
     var childCoordinators: [Coordinator] = []

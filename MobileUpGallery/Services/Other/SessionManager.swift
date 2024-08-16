@@ -35,7 +35,6 @@ class SessionManager: SessionManagerProtocol {
     }
     
     func isTokenValid() -> Bool {
-        
         return accessToken != nil
     }
 }

@@ -32,6 +32,8 @@
 		2DAD9A7B2C6E34A9002CF3B4 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAD9A7A2C6E34A9002CF3B4 /* MainCoordinator.swift */; };
 		2DAD9A7D2C6E34CD002CF3B4 /* GalleryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAD9A7C2C6E34CD002CF3B4 /* GalleryCoordinator.swift */; };
 		2DAD9A7F2C6E5939002CF3B4 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAD9A7E2C6E5939002CF3B4 /* LoginCoordinator.swift */; };
+		2DAD9A822C6F63B4002CF3B4 /* GalleryVC+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAD9A812C6F63B4002CF3B4 /* GalleryVC+CollectionView.swift */; };
+		2DAD9A842C6F9FB5002CF3B4 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAD9A832C6F9FB5002CF3B4 /* PhotoCell.swift */; };
 		7682C5C8B8E163EF4C5FA49E /* Pods_MobileUpGallery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0B8ADA790F3D7141EFCF694 /* Pods_MobileUpGallery.framework */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +66,8 @@
 		2DAD9A7A2C6E34A9002CF3B4 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		2DAD9A7C2C6E34CD002CF3B4 /* GalleryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCoordinator.swift; sourceTree = "<group>"; };
 		2DAD9A7E2C6E5939002CF3B4 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
+		2DAD9A812C6F63B4002CF3B4 /* GalleryVC+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GalleryVC+CollectionView.swift"; sourceTree = "<group>"; };
+		2DAD9A832C6F9FB5002CF3B4 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		A0B8ADA790F3D7141EFCF694 /* Pods_MobileUpGallery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MobileUpGallery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5AC10A44F0F6041E73AD41E /* Pods-MobileUpGallery.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobileUpGallery.debug.xcconfig"; path = "Target Support Files/Pods-MobileUpGallery/Pods-MobileUpGallery.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -122,6 +126,7 @@
 				2DAD9A4F2C6E1070002CF3B4 /* LoginViewController.swift */,
 				2DAD9A762C6E3434002CF3B4 /* GalleryViewController.swift */,
 				2DAD9A742C6E3410002CF3B4 /* DetailViewController.swift */,
+				2DAD9A802C6F6383002CF3B4 /* CollectionView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -189,10 +194,19 @@
 			children = (
 				2DAD9A6C2C6E1B1E002CF3B4 /* AppCoordinator.swift */,
 				2DAD9A7A2C6E34A9002CF3B4 /* MainCoordinator.swift */,
-				2DAD9A7C2C6E34CD002CF3B4 /* GalleryCoordinator.swift */,
 				2DAD9A7E2C6E5939002CF3B4 /* LoginCoordinator.swift */,
+				2DAD9A7C2C6E34CD002CF3B4 /* GalleryCoordinator.swift */,
 			);
 			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		2DAD9A802C6F6383002CF3B4 /* CollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				2DAD9A812C6F63B4002CF3B4 /* GalleryVC+CollectionView.swift */,
+				2DAD9A832C6F9FB5002CF3B4 /* PhotoCell.swift */,
+			);
+			path = CollectionView;
 			sourceTree = "<group>";
 		};
 		333999D2145617D1931221CB /* Frameworks */ = {
@@ -327,6 +341,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2DAD9A672C6E1ABC002CF3B4 /* VideoCacheService.swift in Sources */,
+				2DAD9A842C6F9FB5002CF3B4 /* PhotoCell.swift in Sources */,
 				2DAD9A7B2C6E34A9002CF3B4 /* MainCoordinator.swift in Sources */,
 				2DAD9A542C6E140B002CF3B4 /* MainViewModel.swift in Sources */,
 				2DAD9A502C6E1070002CF3B4 /* LoginViewController.swift in Sources */,
@@ -338,6 +353,7 @@
 				2DAD9A732C6E3311002CF3B4 /* GalleryViewModel.swift in Sources */,
 				2DAD9A562C6E141E002CF3B4 /* LoginViewModel.swift in Sources */,
 				2DAD9A612C6E1A61002CF3B4 /* AlertService.swift in Sources */,
+				2DAD9A822C6F63B4002CF3B4 /* GalleryVC+CollectionView.swift in Sources */,
 				2DAD9A752C6E3410002CF3B4 /* DetailViewController.swift in Sources */,
 				2DAD9A5A2C6E19BE002CF3B4 /* NetworkManager.swift in Sources */,
 				2DAD9A3F2C6E019A002CF3B4 /* MainViewController.swift in Sources */,

@@ -8,8 +8,7 @@
 import Foundation
 protocol VKAPIServiceProtocol {
     func authorize(completion: @escaping (Result<URLRequest, Error>) -> Void)
-    func fetchPhotos(token: String, completion: @escaping (Result<[Photo], Error>) -> Void)
-    func fetchVideos(completion: @escaping (Result<[Video], Error>) -> Void)
+    func fetchPhotos(token: String, completion: @escaping (Result<[PhotoItem], Error>) -> Void)
 }
 
 final class VKAPIService: VKAPIServiceProtocol {
@@ -34,30 +33,23 @@ final class VKAPIService: VKAPIServiceProtocol {
         let request = URLRequest(url: url)
         completion(.success(request))
     }
-    
-    func fetchPhotos(token: String, completion: @escaping (Result<[Photo], Error>) -> Void) {
-        guard let accessToken = sessionManager.accessToken else {
-            completion(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "No Access Token"])))
-            return
-        }
+    func fetchPhotos(token: String, completion: @escaping (Result<[PhotoItem], Error>) -> Void) {
         let groupId = "128666765"
         let urlString = "https://api.vk.com/method/photos.get?owner_id=-\(groupId)&album_id=wall&access_token=\(token)&v=5.131"
         guard let url = URL(string: urlString) else { return }
         networkManager.performRequest(url: url) { result in
-            switch result {
-            case .success(let data):
-                do {
-                    let photos = try JSONDecoder().decode([Photo].self, from: data)
-                    completion(.success(photos))
-                } catch {
+                switch result {
+                case .success(let data):
+                    do {
+                        let photoResponse = try JSONDecoder().decode(PhotoResponse.self, from: data)
+                        completion(.success(photoResponse.response.items))
+                    } catch {
+                        completion(.failure(error))
+                    }
+                case .failure(let error):
                     completion(.failure(error))
                 }
-            case .failure(let error):
-                completion(.failure(error))
-            }
         }
     }
-    
-    func fetchVideos(completion: @escaping (Result<[Video], Error>) -> Void) {
-    }
+
 }

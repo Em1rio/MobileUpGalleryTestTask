@@ -10,8 +10,8 @@ import UIKit
 
 final class MainCoordinator: Coordinator {
     // MARK: - Variables
-    var navigationController: UINavigationController
-    private var networkManager: NetworkManagerProtocol
+    private let navigationController: UINavigationController
+    private let networkManager: NetworkManagerProtocol
     private let managerLocator: ManagerLocator
     private let sessionManager: SessionManagerProtocol
     var parentCoordinator: Coordinator?
