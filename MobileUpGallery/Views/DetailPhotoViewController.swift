@@ -1,5 +1,5 @@
 //
-//  DetailViewController.swift
+//  DetailPhotoViewController.swift
 //  MobileUpGallery
 //
 //  Created by Emir Nasyrov on 15.08.2024.
@@ -7,36 +7,33 @@
 
 import UIKit
 
-final class DetailViewController: UIViewController {
+final class DetailPhotoViewController: UIViewController {
     // MARK: - Variables
-    private(set) var viewModel: DetailViewModel
-    private weak var coordinator: DetailCoordinator?
-    private let alertService: AlertServiceProtocol = AlertService()
+    private(set) var viewModel: DetailPhotoViewModel
+    private weak var coordinator: DetailPhotoCoordinator?
     // MARK: - UI Components
     private let imageView = UIImageView()
     // MARK: - Lifecycle
-    init(_ viewModel: DetailViewModel, coordinator: DetailCoordinator) {
+    init(_ viewModel: DetailPhotoViewModel, coordinator: DetailPhotoCoordinator) {
         self.viewModel = viewModel
         self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
     }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        setupNavigationBar()
         displayCachedImage()
     }
-
     deinit {
         print("Detail deinit")
     }
     // MARK: - UI Setup
     private func setupUI() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .white
+        setupNavigationBar()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         view.addSubview(imageView)
@@ -52,11 +49,14 @@ final class DetailViewController: UIViewController {
     
     private func setupNavigationBar() {
         let backButton = UIBarButtonItem(image: UIImage(named: "arrowBack"), style: .plain, target: self, action: #selector(backButtonTapped))
-        backButton.tintColor = .label
+        backButton.tintColor = .black
         navigationItem.leftBarButtonItem = backButton
         let shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareButtonTapped))
-        shareButton.tintColor = .label
+        shareButton.tintColor = .black
         navigationItem.rightBarButtonItem = shareButton
+    }
+    private func showAlert(title: String, message: String) {
+        AlertManager.shared.showAutoDismissAlert(in: self, title: title, message: message)
     }
     
     @objc private func backButtonTapped() {
@@ -66,6 +66,13 @@ final class DetailViewController: UIViewController {
     @objc private func shareButtonTapped() {
         guard let image = imageView.image else { return }
         let activityVC = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+        activityVC.completionWithItemsHandler = { [weak self] activityType, completed, returnedItems, error in
+                if completed {
+                    self?.showAlert(title: "Успех!", message: "Фотография сохранена.")
+                } else if let error = error {
+                    self?.showAlert(title: "Ошибка!", message: error.localizedDescription)
+                }
+            }
         present(activityVC, animated: true, completion: nil)
     }
     private func displayCachedImage() {

@@ -9,17 +9,19 @@ import Foundation
 import UIKit
 
 final class PhotoCell: UICollectionViewCell {
+    // MARK: - Variables
     static let identifire = "PhotoCell"
+    // MARK: - UI Components
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         return imageView
     }()
-    
+    // MARK: - Lifecycle
     public func configure(with image: UIImage?) {
         imageView.image = image 
         setupUI()
     }
-    
+    // MARK: - UI Setup
     private func setupUI() {
         contentView.addSubview(imageView)
         imageView.contentMode = .scaleAspectFill

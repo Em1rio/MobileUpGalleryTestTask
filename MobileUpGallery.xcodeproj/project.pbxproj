@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		2D9571DD2C737E06000B702F /* VideoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9571DC2C737E06000B702F /* VideoModel.swift */; };
+		2D97C5972C73875A00934571 /* DetailVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D97C5962C73875A00934571 /* DetailVideoViewController.swift */; };
+		2D97C5992C7388D600934571 /* DetailVideoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D97C5982C7388D600934571 /* DetailVideoCoordinator.swift */; };
+		2D97C59B2C73A38A00934571 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D97C59A2C73A38A00934571 /* NetworkMonitor.swift */; };
+		2D97C59F2C73AA7700934571 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D97C59E2C73AA7700934571 /* AlertManager.swift */; };
 		2DAD9A3B2C6E019A002CF3B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAD9A3A2C6E019A002CF3B4 /* AppDelegate.swift */; };
 		2DAD9A3D2C6E019A002CF3B4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAD9A3C2C6E019A002CF3B4 /* SceneDelegate.swift */; };
 		2DAD9A3F2C6E019A002CF3B4 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAD9A3E2C6E019A002CF3B4 /* MainViewController.swift */; };
@@ -19,30 +23,31 @@
 		2DAD9A5A2C6E19BE002CF3B4 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAD9A592C6E19BE002CF3B4 /* NetworkManager.swift */; };
 		2DAD9A5D2C6E1A0D002CF3B4 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAD9A5C2C6E1A0D002CF3B4 /* APIService.swift */; };
 		2DAD9A5F2C6E1A4A002CF3B4 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAD9A5E2C6E1A4A002CF3B4 /* SessionManager.swift */; };
-		2DAD9A612C6E1A61002CF3B4 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAD9A602C6E1A61002CF3B4 /* AlertService.swift */; };
 		2DAD9A652C6E1AA3002CF3B4 /* ImageCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAD9A642C6E1AA3002CF3B4 /* ImageCacheService.swift */; };
-		2DAD9A672C6E1ABC002CF3B4 /* VideoCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAD9A662C6E1ABC002CF3B4 /* VideoCacheService.swift */; };
 		2DAD9A6A2C6E1AF1002CF3B4 /* ManagerLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAD9A692C6E1AF1002CF3B4 /* ManagerLocator.swift */; };
 		2DAD9A6D2C6E1B1E002CF3B4 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAD9A6C2C6E1B1E002CF3B4 /* AppCoordinator.swift */; };
 		2DAD9A6F2C6E1D82002CF3B4 /* PhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAD9A6E2C6E1D82002CF3B4 /* PhotoModel.swift */; };
 		2DAD9A732C6E3311002CF3B4 /* GalleryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAD9A722C6E3311002CF3B4 /* GalleryViewModel.swift */; };
-		2DAD9A752C6E3410002CF3B4 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAD9A742C6E3410002CF3B4 /* DetailViewController.swift */; };
+		2DAD9A752C6E3410002CF3B4 /* DetailPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAD9A742C6E3410002CF3B4 /* DetailPhotoViewController.swift */; };
 		2DAD9A772C6E3434002CF3B4 /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAD9A762C6E3434002CF3B4 /* GalleryViewController.swift */; };
-		2DAD9A792C6E3468002CF3B4 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAD9A782C6E3468002CF3B4 /* DetailViewModel.swift */; };
+		2DAD9A792C6E3468002CF3B4 /* DetailPhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAD9A782C6E3468002CF3B4 /* DetailPhotoViewModel.swift */; };
 		2DAD9A7B2C6E34A9002CF3B4 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAD9A7A2C6E34A9002CF3B4 /* MainCoordinator.swift */; };
 		2DAD9A7D2C6E34CD002CF3B4 /* GalleryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAD9A7C2C6E34CD002CF3B4 /* GalleryCoordinator.swift */; };
 		2DAD9A7F2C6E5939002CF3B4 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAD9A7E2C6E5939002CF3B4 /* LoginCoordinator.swift */; };
 		2DAD9A822C6F63B4002CF3B4 /* GalleryVC+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAD9A812C6F63B4002CF3B4 /* GalleryVC+CollectionView.swift */; };
 		2DAD9A842C6F9FB5002CF3B4 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAD9A832C6F9FB5002CF3B4 /* PhotoCell.swift */; };
 		2DAD9A862C70A940002CF3B4 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAD9A852C70A940002CF3B4 /* VideoCell.swift */; };
-		2DAD9A882C71FAF0002CF3B4 /* DetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAD9A872C71FAF0002CF3B4 /* DetailCoordinator.swift */; };
+		2DAD9A882C71FAF0002CF3B4 /* DetailPhotoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAD9A872C71FAF0002CF3B4 /* DetailPhotoCoordinator.swift */; };
 		2DAD9A8A2C720502002CF3B4 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAD9A892C720502002CF3B4 /* DateFormatter.swift */; };
-		7682C5C8B8E163EF4C5FA49E /* Pods_MobileUpGallery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0B8ADA790F3D7141EFCF694 /* Pods_MobileUpGallery.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		02FEC234263B2F1F99464623 /* Pods-MobileUpGallery.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobileUpGallery.release.xcconfig"; path = "Target Support Files/Pods-MobileUpGallery/Pods-MobileUpGallery.release.xcconfig"; sourceTree = "<group>"; };
 		2D9571DC2C737E06000B702F /* VideoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoModel.swift; sourceTree = "<group>"; };
+		2D97C5962C73875A00934571 /* DetailVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVideoViewController.swift; sourceTree = "<group>"; };
+		2D97C5982C7388D600934571 /* DetailVideoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVideoCoordinator.swift; sourceTree = "<group>"; };
+		2D97C59A2C73A38A00934571 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
+		2D97C59E2C73AA7700934571 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		2DAD9A372C6E019A002CF3B4 /* MobileUpGallery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobileUpGallery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DAD9A3A2C6E019A002CF3B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2DAD9A3C2C6E019A002CF3B4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -56,25 +61,22 @@
 		2DAD9A592C6E19BE002CF3B4 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		2DAD9A5C2C6E1A0D002CF3B4 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		2DAD9A5E2C6E1A4A002CF3B4 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
-		2DAD9A602C6E1A61002CF3B4 /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		2DAD9A642C6E1AA3002CF3B4 /* ImageCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheService.swift; sourceTree = "<group>"; };
-		2DAD9A662C6E1ABC002CF3B4 /* VideoCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCacheService.swift; sourceTree = "<group>"; };
 		2DAD9A692C6E1AF1002CF3B4 /* ManagerLocator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerLocator.swift; sourceTree = "<group>"; };
 		2DAD9A6C2C6E1B1E002CF3B4 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		2DAD9A6E2C6E1D82002CF3B4 /* PhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModel.swift; sourceTree = "<group>"; };
 		2DAD9A722C6E3311002CF3B4 /* GalleryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewModel.swift; sourceTree = "<group>"; };
-		2DAD9A742C6E3410002CF3B4 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		2DAD9A742C6E3410002CF3B4 /* DetailPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPhotoViewController.swift; sourceTree = "<group>"; };
 		2DAD9A762C6E3434002CF3B4 /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
-		2DAD9A782C6E3468002CF3B4 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
+		2DAD9A782C6E3468002CF3B4 /* DetailPhotoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPhotoViewModel.swift; sourceTree = "<group>"; };
 		2DAD9A7A2C6E34A9002CF3B4 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		2DAD9A7C2C6E34CD002CF3B4 /* GalleryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCoordinator.swift; sourceTree = "<group>"; };
 		2DAD9A7E2C6E5939002CF3B4 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		2DAD9A812C6F63B4002CF3B4 /* GalleryVC+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GalleryVC+CollectionView.swift"; sourceTree = "<group>"; };
 		2DAD9A832C6F9FB5002CF3B4 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		2DAD9A852C70A940002CF3B4 /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
-		2DAD9A872C71FAF0002CF3B4 /* DetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCoordinator.swift; sourceTree = "<group>"; };
+		2DAD9A872C71FAF0002CF3B4 /* DetailPhotoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPhotoCoordinator.swift; sourceTree = "<group>"; };
 		2DAD9A892C720502002CF3B4 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
-		A0B8ADA790F3D7141EFCF694 /* Pods_MobileUpGallery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MobileUpGallery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5AC10A44F0F6041E73AD41E /* Pods-MobileUpGallery.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobileUpGallery.debug.xcconfig"; path = "Target Support Files/Pods-MobileUpGallery/Pods-MobileUpGallery.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -83,7 +85,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7682C5C8B8E163EF4C5FA49E /* Pods_MobileUpGallery.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,7 +132,8 @@
 				2DAD9A3E2C6E019A002CF3B4 /* MainViewController.swift */,
 				2DAD9A4F2C6E1070002CF3B4 /* LoginViewController.swift */,
 				2DAD9A762C6E3434002CF3B4 /* GalleryViewController.swift */,
-				2DAD9A742C6E3410002CF3B4 /* DetailViewController.swift */,
+				2DAD9A742C6E3410002CF3B4 /* DetailPhotoViewController.swift */,
+				2D97C5962C73875A00934571 /* DetailVideoViewController.swift */,
 				2DAD9A802C6F6383002CF3B4 /* CollectionView */,
 			);
 			path = Views;
@@ -143,7 +145,7 @@
 				2DAD9A532C6E140B002CF3B4 /* MainViewModel.swift */,
 				2DAD9A552C6E141E002CF3B4 /* LoginViewModel.swift */,
 				2DAD9A722C6E3311002CF3B4 /* GalleryViewModel.swift */,
-				2DAD9A782C6E3468002CF3B4 /* DetailViewModel.swift */,
+				2DAD9A782C6E3468002CF3B4 /* DetailPhotoViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -188,10 +190,10 @@
 			isa = PBXGroup;
 			children = (
 				2DAD9A5E2C6E1A4A002CF3B4 /* SessionManager.swift */,
-				2DAD9A602C6E1A61002CF3B4 /* AlertService.swift */,
 				2DAD9A642C6E1AA3002CF3B4 /* ImageCacheService.swift */,
-				2DAD9A662C6E1ABC002CF3B4 /* VideoCacheService.swift */,
 				2DAD9A892C720502002CF3B4 /* DateFormatter.swift */,
+				2D97C59A2C73A38A00934571 /* NetworkMonitor.swift */,
+				2D97C59E2C73AA7700934571 /* AlertManager.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -203,7 +205,8 @@
 				2DAD9A7A2C6E34A9002CF3B4 /* MainCoordinator.swift */,
 				2DAD9A7E2C6E5939002CF3B4 /* LoginCoordinator.swift */,
 				2DAD9A7C2C6E34CD002CF3B4 /* GalleryCoordinator.swift */,
-				2DAD9A872C71FAF0002CF3B4 /* DetailCoordinator.swift */,
+				2DAD9A872C71FAF0002CF3B4 /* DetailPhotoCoordinator.swift */,
+				2D97C5982C7388D600934571 /* DetailVideoCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -221,7 +224,6 @@
 		333999D2145617D1931221CB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A0B8ADA790F3D7141EFCF694 /* Pods_MobileUpGallery.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -246,7 +248,6 @@
 				2DAD9A332C6E019A002CF3B4 /* Sources */,
 				2DAD9A342C6E019A002CF3B4 /* Frameworks */,
 				2DAD9A352C6E019A002CF3B4 /* Resources */,
-				459A89A96365AA459F71DD62 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -303,23 +304,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		459A89A96365AA459F71DD62 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MobileUpGallery/Pods-MobileUpGallery-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MobileUpGallery/Pods-MobileUpGallery-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MobileUpGallery/Pods-MobileUpGallery-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		DDF3BE83842E45635616BF2A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -349,23 +333,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2DAD9A672C6E1ABC002CF3B4 /* VideoCacheService.swift in Sources */,
 				2DAD9A842C6F9FB5002CF3B4 /* PhotoCell.swift in Sources */,
 				2DAD9A7B2C6E34A9002CF3B4 /* MainCoordinator.swift in Sources */,
-				2DAD9A882C71FAF0002CF3B4 /* DetailCoordinator.swift in Sources */,
+				2D97C59F2C73AA7700934571 /* AlertManager.swift in Sources */,
+				2DAD9A882C71FAF0002CF3B4 /* DetailPhotoCoordinator.swift in Sources */,
 				2DAD9A542C6E140B002CF3B4 /* MainViewModel.swift in Sources */,
 				2DAD9A502C6E1070002CF3B4 /* LoginViewController.swift in Sources */,
-				2DAD9A792C6E3468002CF3B4 /* DetailViewModel.swift in Sources */,
+				2DAD9A792C6E3468002CF3B4 /* DetailPhotoViewModel.swift in Sources */,
 				2DAD9A652C6E1AA3002CF3B4 /* ImageCacheService.swift in Sources */,
+				2D97C59B2C73A38A00934571 /* NetworkMonitor.swift in Sources */,
 				2DAD9A862C70A940002CF3B4 /* VideoCell.swift in Sources */,
 				2DAD9A772C6E3434002CF3B4 /* GalleryViewController.swift in Sources */,
 				2D9571DD2C737E06000B702F /* VideoModel.swift in Sources */,
 				2DAD9A5F2C6E1A4A002CF3B4 /* SessionManager.swift in Sources */,
 				2DAD9A732C6E3311002CF3B4 /* GalleryViewModel.swift in Sources */,
 				2DAD9A562C6E141E002CF3B4 /* LoginViewModel.swift in Sources */,
-				2DAD9A612C6E1A61002CF3B4 /* AlertService.swift in Sources */,
 				2DAD9A822C6F63B4002CF3B4 /* GalleryVC+CollectionView.swift in Sources */,
-				2DAD9A752C6E3410002CF3B4 /* DetailViewController.swift in Sources */,
+				2DAD9A752C6E3410002CF3B4 /* DetailPhotoViewController.swift in Sources */,
 				2DAD9A5A2C6E19BE002CF3B4 /* NetworkManager.swift in Sources */,
 				2DAD9A3F2C6E019A002CF3B4 /* MainViewController.swift in Sources */,
 				2DAD9A6A2C6E1AF1002CF3B4 /* ManagerLocator.swift in Sources */,
@@ -374,6 +358,8 @@
 				2DAD9A7D2C6E34CD002CF3B4 /* GalleryCoordinator.swift in Sources */,
 				2DAD9A3B2C6E019A002CF3B4 /* AppDelegate.swift in Sources */,
 				2DAD9A8A2C720502002CF3B4 /* DateFormatter.swift in Sources */,
+				2D97C5992C7388D600934571 /* DetailVideoCoordinator.swift in Sources */,
+				2D97C5972C73875A00934571 /* DetailVideoViewController.swift in Sources */,
 				2DAD9A6D2C6E1B1E002CF3B4 /* AppCoordinator.swift in Sources */,
 				2DAD9A5D2C6E1A0D002CF3B4 /* APIService.swift in Sources */,
 				2DAD9A3D2C6E019A002CF3B4 /* SceneDelegate.swift in Sources */,

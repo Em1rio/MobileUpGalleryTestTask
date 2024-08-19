@@ -1,5 +1,5 @@
 //
-//  DetailCoordinator.swift
+//  DetailPhotoCoordinator.swift
 //  MobileUpGallery
 //
 //  Created by Emir Nasyrov on 18.08.2024.
@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-final class DetailCoordinator: Coordinator {
+final class DetailPhotoCoordinator: Coordinator {
     private let navigationController: UINavigationController
     private let networkManager: NetworkManagerProtocol
     private let managerLocator: ManagerLocator
@@ -29,10 +29,13 @@ final class DetailCoordinator: Coordinator {
     }
     
     func start() {
-        let detailVM = DetailViewModel(imageCacheService: managerLocator.getImageCacheService(), photoItem: photoItem)
-        let detailVC = DetailViewController(detailVM, coordinator: self)
+        let detailVM = DetailPhotoViewModel(imageCacheService: managerLocator.getImageCacheService(), photoItem: photoItem)
+        let detailVC = DetailPhotoViewController(detailVM, coordinator: self)
         let formattedDate = DateFormatter.shared.formatUnixTimestamp(TimeInterval(photoItem.date))
         detailVC.title = "\(formattedDate)"
+        let appearance = UINavigationBarAppearance()
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.black]
+        navigationController.navigationBar.standardAppearance = appearance
         navigationController.pushViewController(detailVC, animated: true)
         navigationController.isNavigationBarHidden = false
     }

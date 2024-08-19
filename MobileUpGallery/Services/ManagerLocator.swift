@@ -8,14 +8,11 @@
 import Foundation
 
 final class ManagerLocator {
-    
     // MARK: - Properties
     private let userDefaults: UserDefaults
     private let networkManager: NetworkManagerProtocol
     private let sessionManager: SessionManagerProtocol
-    private let alertService: AlertServiceProtocol
     private let imageCacheService: ImageCacheServiceProtocol
-    private let videoCacheService: VideoCacheServiceProtocol
     private let vkAPIService: VKAPIServiceProtocol
     
     // MARK: - Initialization
@@ -23,17 +20,13 @@ final class ManagerLocator {
         self.userDefaults = userDefaults
         self.sessionManager = SessionManager(userDefaults: userDefaults)
         self.networkManager = NetworkManager(sessionManager: sessionManager)
-        self.alertService = AlertService()
         self.imageCacheService = ImageCacheService()
-        self.videoCacheService = VideoCacheService()
         self.vkAPIService = VKAPIService(networkManager: networkManager, sessionManager: sessionManager)
     }
     
     // MARK: - Accessors for Services and Managers
     func getNetworkManager() -> NetworkManagerProtocol { return networkManager }
     func getSessionManager() -> SessionManagerProtocol { return sessionManager }
-    func getAlertService() -> AlertServiceProtocol { return alertService }
     func getImageCacheService() -> ImageCacheServiceProtocol { return imageCacheService }
-    func getVideoCacheService() -> VideoCacheServiceProtocol { return videoCacheService }
     func getVKAPIService() -> VKAPIServiceProtocol { return vkAPIService }
 }

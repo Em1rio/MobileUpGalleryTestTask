@@ -11,7 +11,6 @@ final class GalleryViewController: UIViewController, GalleryViewModelDelegate {
     // MARK: - Variables
     private(set) var viewModel: GalleryViewModel
     private weak var coordinator: GalleryCoordinator?
-    
     // MARK: - UI Components
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -80,18 +79,7 @@ final class GalleryViewController: UIViewController, GalleryViewModelDelegate {
         super.viewDidLoad()
         setupView()
         viewModel.delegate = self
-        viewModel.loadAlbums { [weak self] result in
-            switch result {
-            case .success():
-                DispatchQueue.main.async {
-                    self?.photoCollectionView.reloadData()
-                    self?.updateCollectionViewLayout(for: self?.segmentedControl.selectedSegmentIndex ?? 0)
-                }
-            case .failure(let error):
-                print("Failed to load albums: \(error)")
-            }
-        }
-        viewModel.fetchVideo()
+        fetchContent()
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -123,7 +111,7 @@ final class GalleryViewController: UIViewController, GalleryViewModelDelegate {
         videoCollectionView.delegate = self
         videoCollectionView.dataSource = self
         videoCollectionView.register(VideoCell.self, forCellWithReuseIdentifier: VideoCell.identifier)
-
+        
         logoutButton.addTarget(self, action: #selector(logoutButtonTapped), for: .touchUpInside)
         segmentedControl.addTarget(self, action: #selector(segmentedControlChanged), for: .valueChanged)
     }
@@ -165,6 +153,35 @@ final class GalleryViewController: UIViewController, GalleryViewModelDelegate {
         ])
     }
     // MARK: - Actions
+    private func fetchContent() {
+        activityIndicator.startAnimating()
+        if NetworkMonitor.shared.isConnected {
+            viewModel.loadAlbums { [weak self] result in
+                DispatchQueue.main.async {
+                    self?.activityIndicator.stopAnimating()
+                }
+                switch result {
+                case .success():
+                    DispatchQueue.main.async {
+                        self?.photoCollectionView.reloadData()
+                        self?.updateCollectionViewLayout(for: self?.segmentedControl.selectedSegmentIndex ?? 0)
+                    }
+                case .failure(let error):
+                    if let strongSelf = self {
+                        AlertManager.shared.showDataLoadErrorAlert(in: strongSelf)
+                    }
+                    print("Failed to load albums: \(error)")
+                }
+            }
+            viewModel.fetchVideo()
+        } else {
+            DispatchQueue.main.async {
+                self.activityIndicator.stopAnimating()
+            }
+            AlertManager.shared.showNoInternetConnectionAlert(in: self)
+        }
+        
+    }
     @objc private func logoutButtonTapped() {
         coordinator?.logOut()
     }
@@ -185,8 +202,21 @@ final class GalleryViewController: UIViewController, GalleryViewModelDelegate {
             completion(cachedImage)
             return
         }
-        
         viewModel.loadImageData(from: urlString) { [weak self] data in
+            if let data = data, let image = UIImage(data: data) {
+                self?.viewModel.imageService.imageCache(image, forKey: urlString)
+                completion(image)
+            } else {
+                completion(nil)
+            }
+        }
+    }
+    func cacheVideoThumbnail(for urlString: String, completion: @escaping (UIImage?) -> Void) {
+        if let cachedImage = viewModel.imageService.getImage(forKey: urlString) {
+            completion(cachedImage)
+            return
+        }
+        viewModel.loadVideoThumbnail(from: urlString) { [weak self] data in
             if let data = data, let image = UIImage(data: data) {
                 self?.viewModel.imageService.imageCache(image, forKey: urlString)
                 completion(image)
@@ -204,19 +234,22 @@ final class GalleryViewController: UIViewController, GalleryViewModelDelegate {
                 self.photoCollectionView.performBatchUpdates({
                     self.photoCollectionView.insertItems(at: indexPaths)
                 }, completion: nil)
-                
+                self.activityIndicator.stopAnimating()
             }
         }
         
     }
     func didUpdateVideos() {
         DispatchQueue.main.async {
-            self.videoCollectionView.reloadData() // Обновление видео
+            self.videoCollectionView.reloadData()
         }
     }
     
-    
     func goToDetail(for photoItem: PhotoItem) {
-        coordinator?.goToDetail(for: photoItem)
+        coordinator?.goToDetailPhoto(for: photoItem)
     }
+    func goToDetail(for videoUrl: URL,with title: String) {
+        coordinator?.goToDetailVideo(videoUrl, title)
+    }
+    
 }

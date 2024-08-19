@@ -8,26 +8,31 @@
 import Foundation
 protocol SessionManagerProtocol {
     var accessToken: String? { get }
-    func saveToken(_ token: String)
+    func saveToken(_ token: String, expiresIn: Int?)
     func clearToken()
     func isTokenValid() -> Bool
 }
 
-class SessionManager: SessionManagerProtocol {
+final class SessionManager: SessionManagerProtocol {
     // MARK: - Variables
     private let tokenKey = "accessToken"
+    private let expirationDateKey = "tokenExpirationDate"
     private let userDefaults: UserDefaults
+    var accessToken: String? {
+        return userDefaults.string(forKey: tokenKey)
+    }
     // MARK: - Init
     init(userDefaults: UserDefaults = .standard) {
         self.userDefaults = userDefaults
     }
     
-    var accessToken: String? {
-        return userDefaults.string(forKey: tokenKey)
-    }
-    
-    func saveToken(_ token: String) {
+    // MARK: - Actions
+    func saveToken(_ token: String, expiresIn: Int?) {
         userDefaults.set(token, forKey: tokenKey)
+        if let expiresIn = expiresIn {
+            let expirationDate = Date().addingTimeInterval(TimeInterval(expiresIn))
+            userDefaults.set(expirationDate, forKey: expirationDateKey)
+        }
     }
     
     func clearToken() {
@@ -35,6 +40,9 @@ class SessionManager: SessionManagerProtocol {
     }
     
     func isTokenValid() -> Bool {
-        return accessToken != nil
+        guard let expirationDate = userDefaults.object(forKey: expirationDateKey) as? Date else {
+            return false
+        }
+        return Date() < expirationDate
     }
 }

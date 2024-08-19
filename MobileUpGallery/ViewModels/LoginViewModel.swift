@@ -12,7 +12,7 @@ final class LoginViewModel {
     private let apiService: VKAPIServiceProtocol
     private let sessionManager: SessionManagerProtocol
     var onTokenReceived: ((String) -> Void)?
-    // MARK: - Init
+    // MARK: - Lifecycle
     init(apiService: VKAPIServiceProtocol, sessionManager: SessionManagerProtocol) {
         self.apiService = apiService
         self.sessionManager = sessionManager
@@ -33,7 +33,6 @@ final class LoginViewModel {
             if keyValue.count == 2 {
                 let key = String(keyValue[0])
                 let value = String(keyValue[1])
-                
                 switch key {
                 case "access_token":
                     token = value
@@ -46,23 +45,19 @@ final class LoginViewModel {
                 }
             }
         }
-        
         if let token = token {
-            saveToken(token)
-            print("TOKEN: \(token)")
+            saveToken(token, expiresIn: expiresIn)
             onTokenReceived?(token)
         }
-        
         if let expiresIn = expiresIn {
             print("Token expires in \(expiresIn) seconds")
         }
-        
         if let userId = userId {
             print("User ID: \(userId)")
         }
     }
 
-    private func saveToken(_ token: String) {
-        sessionManager.saveToken(token)
+    private func saveToken(_ token: String, expiresIn: Int?) {
+        sessionManager.saveToken(token, expiresIn: expiresIn)
     }
 }

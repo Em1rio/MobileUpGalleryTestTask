@@ -16,6 +16,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
             self.window = window
+            NetworkMonitor.shared.startMonitoring()
             let navController = UINavigationController()
             navController.isNavigationBarHidden = true
             let managerLocator = ManagerLocator()

@@ -1,5 +1,5 @@
 //
-//  DetailViewModel.swift
+//  DetailPhotoViewModel.swift
 //  MobileUpGallery
 //
 //  Created by Emir Nasyrov on 15.08.2024.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class DetailViewModel {
+final class DetailPhotoViewModel {
     // MARK: - Variables
     private(set) var imageService: ImageCacheServiceProtocol
     private(set) var photoItem: PhotoItem
@@ -16,6 +16,4 @@ final class DetailViewModel {
         self.imageService = imageCacheService
         self.photoItem = photoItem
     }
-    // MARK: - Logic
-    
 }

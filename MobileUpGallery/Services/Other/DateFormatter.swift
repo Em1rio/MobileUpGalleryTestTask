@@ -9,7 +9,6 @@ import Foundation
 
 final class DateFormatter {
     static let shared = DateFormatter()
-        
         private init() {
             dateFormatter.dateFormat = "d MMMM yyyy"
             dateFormatter.locale = Locale(identifier: "ru_RU")
@@ -20,5 +19,4 @@ final class DateFormatter {
             let date = Date(timeIntervalSince1970: timestamp)
             return dateFormatter.string(from: date)
         }
-    
 }

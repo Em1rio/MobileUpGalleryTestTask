@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import VK_ios_sdk
 
 protocol VKAPIServiceProtocol {
     func authorize(completion: @escaping (Result<URLRequest, Error>) -> Void)

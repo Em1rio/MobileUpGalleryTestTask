@@ -10,23 +10,23 @@ import UIKit
 
 extension GalleryViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-            if collectionView == photoCollectionView {
-                return 1
-            } else if collectionView == videoCollectionView {
-                return 0
-            }
+        if collectionView == photoCollectionView {
+            return 1
+        } else if collectionView == videoCollectionView {
             return 0
         }
-
-        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-            if collectionView == photoCollectionView {
-                return 1
-            } else if collectionView == videoCollectionView {
-                return 10
-            }
-            return 0
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        if collectionView == photoCollectionView {
+            return 1
+        } else if collectionView == videoCollectionView {
+            return 10
         }
-
+        return 0
+    }
+    
     private func configureLayout(for mode: Int) {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 4
@@ -45,45 +45,44 @@ extension GalleryViewController: UICollectionViewDelegateFlowLayout {
             layout.minimumInteritemSpacing = 1
             layout.minimumLineSpacing = 10
             let itemWidth = videoCollectionView.bounds.width
-                    let itemHeight: CGFloat = 210
-                    layout.itemSize = CGSize(width: itemWidth, height: itemHeight)
-                    videoCollectionView.setCollectionViewLayout(layout, animated: true)
-                    videoCollectionView.reloadData()
+            let itemHeight: CGFloat = 210
+            layout.itemSize = CGSize(width: itemWidth, height: itemHeight)
+            videoCollectionView.setCollectionViewLayout(layout, animated: true)
+            videoCollectionView.reloadData()
             
         default:
             break
         }
     }
-
+    
     func updateCollectionViewLayout(for mode: Int) {
         configureLayout(for: mode)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            if collectionView == photoCollectionView {
-                let width = (collectionView.bounds.width - 3) / 2
-                return CGSize(width: width, height: width)
-            } else if collectionView == videoCollectionView {
-                let width = collectionView.bounds.width
-                let height: CGFloat = 210
-                return CGSize(width: width, height: height)
-            }
-            return CGSize.zero
+        if collectionView == photoCollectionView {
+            let width = (collectionView.bounds.width - 3) / 2
+            return CGSize(width: width, height: width)
+        } else if collectionView == videoCollectionView {
+            let width = collectionView.bounds.width
+            let height: CGFloat = 210
+            return CGSize(width: width, height: height)
         }
-
+        return CGSize.zero
     }
-
+    
+}
 
 extension GalleryViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == photoCollectionView {
-                   return viewModel.photos.count
-               } else if collectionView == videoCollectionView {
-                   return viewModel.videos.count
-               } else {
-                   return 0
-               }
+            return viewModel.photos.count
+        } else if collectionView == videoCollectionView {
+            return viewModel.videos.count
+        } else {
+            return 0
         }
-
+    }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == photoCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCell.identifire, for: indexPath) as! PhotoCell
@@ -99,10 +98,7 @@ extension GalleryViewController: UICollectionViewDataSource {
         } else if collectionView == videoCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VideoCell.identifier, for: indexPath) as! VideoCell
             let video = viewModel.videos[indexPath.item]
-            viewModel.loadVideoThumbnail(from: video.thumbnailUrl ?? "") { data in
-                guard let data = data, let image = UIImage(data: data) else {
-                    return
-                }
+            cacheVideoThumbnail(for: video.thumbnailUrl ?? "") { image in
                 DispatchQueue.main.async {
                     cell.configure(with: image, text: video.title)
                 }
@@ -112,16 +108,14 @@ extension GalleryViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
     }
-
-    }
-
-
+    
+}
 
 extension GalleryViewController: UICollectionViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let contentOffsetY = scrollView.contentOffset.y
-               let contentHeight = scrollView.contentSize.height
-               let scrollViewHeight = scrollView.frame.size.height
+        let contentHeight = scrollView.contentSize.height
+        let scrollViewHeight = scrollView.frame.size.height
         if contentOffsetY > contentHeight - scrollViewHeight * 2 {
             if !viewModel.isLoadingPhotos && !viewModel.isAllPhotosLoaded {
                 viewModel.loadNextAlbum { [weak self] result in
@@ -143,7 +137,13 @@ extension GalleryViewController: UICollectionViewDelegate {
             let photoItem = viewModel.photos[indexPath.item]
             goToDetail(for: photoItem)
         } else {
-            //TODO
+            let video = viewModel.videos[indexPath.item]
+            let videoUrlString = video.videoUrl
+            if let videoUrl = URL(string: video.videoUrl) {
+                goToDetail(for: videoUrl, with: video.title)
+            } else {
+                print("Invalid URL string: \(videoUrlString)")
+            }
         }
     }
 }

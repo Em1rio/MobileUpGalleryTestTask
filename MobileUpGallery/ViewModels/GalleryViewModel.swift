@@ -15,13 +15,13 @@ final class GalleryViewModel {
     private let apiService: VKAPIServiceProtocol
     private let networkManager: NetworkManagerProtocol
     private(set) var imageService: ImageCacheServiceProtocol
+    weak var delegate: GalleryViewModelDelegate?
     private(set) var photos: [PhotoItem] = []
     private(set) var videos: [Video] = []
     private var albums: [Album] = []
     private var currentAlbumIndex = 0
     var isLoadingPhotos = false
     var isAllPhotosLoaded = false
-    weak var delegate: GalleryViewModelDelegate?
     // MARK: - Init
     init(apiService: VKAPIServiceProtocol, networkManager: NetworkManagerProtocol, imageCacheService: ImageCacheServiceProtocol ) {
         self.apiService = apiService
@@ -87,17 +87,17 @@ final class GalleryViewModel {
     
     func fetchVideo() {
         guard let token = UserDefaults.standard.string(forKey: "accessToken") else { return }
-           apiService.fetchVideos(token: token) { [weak self] result in
-               switch result {
-               case .success(let videos):
-                   self?.videos = videos
-                   DispatchQueue.main.async {
-                       self?.delegate?.didUpdateVideos()
-                   }
-               case .failure(let error):
-                   print("Failed to fetch videos: \(error)")
-               }
-           }
+        apiService.fetchVideos(token: token) { [weak self] result in
+            switch result {
+            case .success(let videos):
+                self?.videos = videos
+                DispatchQueue.main.async {
+                    self?.delegate?.didUpdateVideos()
+                }
+            case .failure(let error):
+                print("Failed to fetch videos: \(error)")
+            }
+        }
     }
     func loadVideoThumbnail(from urlString: String, completion: @escaping (Data?) -> Void) {
         networkManager.loadImage(from: urlString, completion: completion)

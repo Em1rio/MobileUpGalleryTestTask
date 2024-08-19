@@ -15,6 +15,7 @@ final class MainViewController: UIViewController {
     private let appNameLabel: UILabel = {
         let label = UILabel()
         label.text = "Mobile Up \nGallery"
+        label.textColor = .black
         label.textAlignment = .left
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 44, weight: .bold)
@@ -45,14 +46,13 @@ final class MainViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         coordinator?.didFinish()
-        
     }
     deinit {
         print("Main deinit")
     }
     // MARK: - UI Setup
     private func setupUI() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .white
         setupAppNameLabel()
         setupLoginButton()
         

@@ -17,6 +17,11 @@ final class LoginViewController: UIViewController, WKNavigationDelegate {
         let webView = WKWebView()
         return webView
     }()
+    let activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
     // MARK: - Lifecycle
     init(_ viewModel: LoginViewModel, coordinator: LoginCoordinator?) {
         self.viewModel = viewModel
@@ -50,23 +55,44 @@ final class LoginViewController: UIViewController, WKNavigationDelegate {
     private func setup() {
         webView.navigationDelegate = self
         view.addSubview(webView)
+        view.addSubview(activityIndicator)
         webView.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             webView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             webView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             webView.topAnchor.constraint(equalTo: view.topAnchor),
-            webView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            webView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            activityIndicator.widthAnchor.constraint(equalToConstant: 100),
+            activityIndicator.heightAnchor.constraint(equalToConstant: 100),
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
     // MARK: - Actions
     @objc private func authorize() {
-        viewModel.authorize { [weak self] result in
-            switch result {
-            case .success(let request):
-                self?.webView.load(request)
-            case .failure(let error):
-                print("Error during authorization: \(error.localizedDescription)")
+        activityIndicator.startAnimating()
+        if NetworkMonitor.shared.isConnected {
+            viewModel.authorize { [weak self] result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(let request):
+                        self?.webView.load(request)
+                    case .failure(let error):
+                        if let strongSelf = self {
+                            AlertManager.shared.showDataLoadErrorAlert(in: strongSelf)
+                        }
+                        print("Error during authorization: \(error.localizedDescription)")
+                    }
+                    self?.activityIndicator.stopAnimating()
+                }
             }
+        }else {
+            DispatchQueue.main.async {
+                self.activityIndicator.stopAnimating()
+            }
+            AlertManager.shared.showNoInternetConnectionAlert(in: self)
         }
     }
     

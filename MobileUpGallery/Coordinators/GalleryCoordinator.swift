@@ -31,7 +31,9 @@ final class GalleryCoordinator: Coordinator {
     func start() {
         let galleryViewModel = GalleryViewModel(apiService: managerLocator.getVKAPIService(), networkManager: managerLocator.getNetworkManager(), imageCacheService: managerLocator.getImageCacheService() )
         let galleryViewController = GalleryViewController(galleryViewModel, coordinator: self)
-        navigationController.pushViewController(galleryViewController, animated: false)
+        navigationController.setViewControllers([galleryViewController], animated: true)
+        navigationController.setNavigationBarHidden(true, animated: false)
+        
     }
     func didFinish() {
         if let parentCoordinator = parentCoordinator as? AppCoordinator {
@@ -43,11 +45,17 @@ final class GalleryCoordinator: Coordinator {
 }
 
 extension GalleryCoordinator {
-    func goToDetail(for photoItem: PhotoItem) {
-        let detailCoordinator = DetailCoordinator(navigationController: navigationController, networkManager: managerLocator.getNetworkManager(), managerLocator: managerLocator, sessionManager: sessionManager, photoItem: photoItem)
-        detailCoordinator.parentCoordinator = self
-        detailCoordinator.start()
-        childCoordinators.append(detailCoordinator)
+    func goToDetailPhoto(for photoItem: PhotoItem) {
+        let detailPhotoCoordinator = DetailPhotoCoordinator(navigationController: navigationController, networkManager: managerLocator.getNetworkManager(), managerLocator: managerLocator, sessionManager: sessionManager, photoItem: photoItem)
+        detailPhotoCoordinator.parentCoordinator = self
+        detailPhotoCoordinator.start()
+        childCoordinators.append(detailPhotoCoordinator)
+    }
+    func goToDetailVideo(_ videoUrl: URL, _ title: String) {
+        let detailVideoCoordinator = DetailVideoCoordinator(navigationController: navigationController, networkManager: managerLocator.getNetworkManager(), videoUrl: videoUrl, videoTitle: title)
+        detailVideoCoordinator.parentCoordinator = self
+        detailVideoCoordinator.start()
+        childCoordinators.append(detailVideoCoordinator)
     }
     func logOut() {
         sessionManager.clearToken()

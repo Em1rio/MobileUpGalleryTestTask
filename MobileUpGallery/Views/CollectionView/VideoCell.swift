@@ -9,16 +9,15 @@ import Foundation
 import UIKit
 
 final class VideoCell: UICollectionViewCell {
-    
+    // MARK: - Variables
     static let identifier = "VideoCell"
-    
+    // MARK: - UI Components
     private let videoPreview: UIImageView = {
         let view = UIImageView()
         view.contentMode = .scaleAspectFit
         view.clipsToBounds = true
         return view
     }()
-    
     private let backgroundLabelView: UIView = {
         let view = UIView()
         view.clipsToBounds = true
@@ -26,14 +25,12 @@ final class VideoCell: UICollectionViewCell {
         view.backgroundColor = .white.withAlphaComponent(0.5)
         return view
     }()
-    
     private let blurEffectView: UIVisualEffectView = {
         let blurEffect = UIBlurEffect(style: .light)
         let view = UIVisualEffectView(effect: blurEffect)
         view.alpha = 0.8
         return view
     }()
-    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 13)
@@ -41,25 +38,21 @@ final class VideoCell: UICollectionViewCell {
         label.lineBreakMode = .byWordWrapping
         return label
     }()
-    
-    
+    // MARK: - Lifecycle
     public func configure(with image: UIImage?, text: String) {
         videoPreview.image = image
         titleLabel.text = text
         setupUI()
         setConstraints()
     }
-    
+    // MARK: - UI Setup
     private func setupUI() {
         addSubview(videoPreview)
-        
         videoPreview.addSubview(backgroundLabelView)
         backgroundLabelView.addSubview(titleLabel)
-        
         backgroundLabelView.addSubview(blurEffectView)
         backgroundLabelView.sendSubviewToBack(blurEffectView)
     }
-    
     private func setConstraints() {
         videoPreview.translatesAutoresizingMaskIntoConstraints = false
         backgroundLabelView.translatesAutoresizingMaskIntoConstraints = false
@@ -93,6 +86,5 @@ final class VideoCell: UICollectionViewCell {
         
         backgroundLabelView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         backgroundLabelView.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-        
     }
 }

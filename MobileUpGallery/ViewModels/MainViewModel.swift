@@ -11,10 +11,9 @@ final class MainViewModel {
     // MARK: - Variables
     private let apiService: VKAPIServiceProtocol
     private let networkManager: NetworkManagerProtocol
-    // MARK: - Init
+    // MARK: - Lifecycle
     init(apiService: VKAPIServiceProtocol, networkManager: NetworkManagerProtocol) {
         self.apiService = apiService
         self.networkManager = networkManager
     }
-    // MARK: - Logic
 }
