@@ -37,6 +37,7 @@ final class SessionManager: SessionManagerProtocol {
     
     func clearToken() {
         userDefaults.removeObject(forKey: tokenKey)
+        userDefaults.removeObject(forKey: expirationDateKey)
     }
     
     func isTokenValid() -> Bool {
