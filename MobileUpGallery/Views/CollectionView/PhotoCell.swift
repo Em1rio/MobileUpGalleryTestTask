@@ -16,7 +16,7 @@ final class PhotoCell: UICollectionViewCell {
     }()
     
     public func configure(with image: UIImage?) {
-        imageView.image = image
+        imageView.image = image 
         setupUI()
     }
     

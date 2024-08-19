@@ -38,6 +38,14 @@ final class LoginViewController: UIViewController, WKNavigationDelegate {
         super.viewDidAppear(animated)
         authorize()
     }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        coordinator?.didFinish()
+        
+    }
+    deinit {
+        print("login deinit")
+    }
     // MARK: - UI Setup
     private func setup() {
         webView.navigationDelegate = self

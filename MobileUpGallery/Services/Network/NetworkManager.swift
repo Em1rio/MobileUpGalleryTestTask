@@ -21,14 +21,22 @@ final class NetworkManager: NetworkManagerProtocol {
     }
     //MARK: - Calls
     func performRequest(url: URL, completion: @escaping (Result<Data, Error>) -> Void) {
-        var request = URLRequest(url: url)
+        let request = URLRequest(url: url)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
                 completion(.failure(error))
                 return
             }
+            if let httpResponse = response as? HTTPURLResponse, !(200...299).contains(httpResponse.statusCode) {
+                let customError = NSError(domain: "", code: httpResponse.statusCode, userInfo: [NSLocalizedDescriptionKey: "HTTP error \(httpResponse.statusCode)"])
+                completion(.failure(customError))
+                return
+            }
             if let data = data {
                 completion(.success(data))
+            } else {
+                let customError = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "No data received"])
+                completion(.failure(customError))
             }
         }
         task.resume()

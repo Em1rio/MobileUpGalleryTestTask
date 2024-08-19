@@ -16,6 +16,7 @@ final class LoginCoordinator: Coordinator {
     private let sessionManager: SessionManagerProtocol
     var parentCoordinator: Coordinator?
     var childCoordinators: [Coordinator] = []
+    var logoutHandler: (() -> Void)?
     // MARK: - Lifecycle
     init(navigationController: UINavigationController,
          networkManager: NetworkManagerProtocol,
@@ -32,6 +33,11 @@ final class LoginCoordinator: Coordinator {
         let loginViewController = LoginViewController(loginViewModel, coordinator: self)
         navigationController.present(loginViewController, animated: true)
     }
+    func didFinish() {
+        guard let parentCoordinator = parentCoordinator as? MainCoordinator else { return }
+        parentCoordinator.childDidFinish(self)
+        
+    }
 }
 
 // MARK: - Navigation
@@ -39,6 +45,7 @@ extension LoginCoordinator {
     func goToGallery() {
         let galleryCoordinator = GalleryCoordinator(navigationController: navigationController, networkManager: managerLocator.getNetworkManager(), managerLocator: managerLocator, sessionManager: sessionManager)
         galleryCoordinator.parentCoordinator = self
+        galleryCoordinator.logoutHandler = logoutHandler
         galleryCoordinator.start()
         childCoordinators.append(galleryCoordinator)
     }

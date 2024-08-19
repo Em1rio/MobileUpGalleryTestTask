@@ -16,6 +16,7 @@ final class MainCoordinator: Coordinator {
     private let sessionManager: SessionManagerProtocol
     var parentCoordinator: Coordinator?
     var childCoordinators: [Coordinator] = []
+    var logoutHandler: (() -> Void)?
     // MARK: - Lifecycle
     init(navigationController: UINavigationController,
          networkManager: NetworkManagerProtocol,
@@ -34,6 +35,11 @@ final class MainCoordinator: Coordinator {
         navigationController.setViewControllers([mainViewController], animated: true)
         
     }
+    func didFinish() {
+        guard let parentCoordinator = parentCoordinator as? AppCoordinator else { return }
+        parentCoordinator.childDidFinish(self)
+        
+    }
 }
 // MARK: - Navigation
 extension MainCoordinator {
@@ -43,7 +49,9 @@ extension MainCoordinator {
                                                 managerLocator: managerLocator,
                                                 sessionManager: sessionManager)
         loginCoordinator.parentCoordinator = self
+        loginCoordinator.logoutHandler = logoutHandler
         loginCoordinator.start()
         childCoordinators.append(loginCoordinator)
     }
+    
 }

@@ -21,22 +21,47 @@ final class LoginViewModel {
     func authorize(completion: @escaping (Result<URLRequest, Error>) -> Void) {
         apiService.authorize(completion: completion)
     }
-    
     func handleToken(from url: URL) {
         guard let fragment = url.fragment else { return }
         let params = fragment.split(separator: "&")
+        var token: String?
+        var expiresIn: Int?
+        var userId: String?
+        
         for param in params {
             let keyValue = param.split(separator: "=")
-            if keyValue.count == 2 && keyValue[0] == "access_token" {
-                let token = String(keyValue[1])
-                saveToken(token)
-                print("TOKEN: \(token)")
-                onTokenReceived?(token)
-                break
+            if keyValue.count == 2 {
+                let key = String(keyValue[0])
+                let value = String(keyValue[1])
+                
+                switch key {
+                case "access_token":
+                    token = value
+                case "expires_in":
+                    expiresIn = Int(value)
+                case "user_id":
+                    userId = value
+                default:
+                    break
+                }
             }
         }
+        
+        if let token = token {
+            saveToken(token)
+            print("TOKEN: \(token)")
+            onTokenReceived?(token)
+        }
+        
+        if let expiresIn = expiresIn {
+            print("Token expires in \(expiresIn) seconds")
+        }
+        
+        if let userId = userId {
+            print("User ID: \(userId)")
+        }
     }
-    
+
     private func saveToken(_ token: String) {
         sessionManager.saveToken(token)
     }

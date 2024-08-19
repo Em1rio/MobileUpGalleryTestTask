@@ -42,6 +42,14 @@ final class MainViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
     }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        coordinator?.didFinish()
+        
+    }
+    deinit {
+        print("Main deinit")
+    }
     // MARK: - UI Setup
     private func setupUI() {
         view.backgroundColor = .systemBackground
